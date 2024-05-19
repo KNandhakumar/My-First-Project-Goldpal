@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bonus Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+    <script>
+        function calculateBonus() {
+            var amount = parseFloat(document.getElementById("rupeesAmount").value);
+            var duration = parseInt(document.getElementById("duration").value);
+            var resultContainer = document.getElementById("bonusResult");
+
+            if (isNaN(amount) || isNaN(duration) || amount <= 0 || duration < 2) {
+                resultContainer.textContent = "Invalid input. Please check the amount and duration.";
+                return;
+            }
+
+            var bonusPercentage = (duration <= 2) ? 0.14 : 0.015;
+            var bonus = amount * bonusPercentage;
+
+            var result = "Bonus: " + bonus.toFixed(2) + " Rupees";
+            resultContainer.textContent = result;
+        }
+    </script>
+</head>
+<body>
+    <div class="background">
+    <h2>Bonus Calculator</h2>
+    <form id="bonusForm">
+        <label for="rupeesAmount">Amount in Rupees:</label>
+        <input type="text" id="rupeesAmount" name="rupeesAmount" placeholder="Enter Amount" required>
+        <br><br>
+
+        <label for="duration">Duration (in months, minimum 2 months):</label>
+        <input type="tel" id="duration" name="duration" placeholder="Enter In Months" required>
+        <br><br>
+
+        <button type="button" onclick="calculateBonus()">Calculate Bonus</button>
+    </form>
+
+    <div id="bonusResult"></div>
+</div>
+</body>
+</html>

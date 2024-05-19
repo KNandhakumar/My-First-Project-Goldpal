@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goldpal Login</title>
+    <link rel="icon" href="goldpal logo.jpg">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <form id="loginForm" action="/api/users/login" method="POST" >
+      <div class="login_form_container">
+        <div class="login_form">
+          <h2>Login</h2>
+          <div class="input_group">
+            <i class="fa fa-user"></i>
+            <input
+              type="text" name="userId"
+              placeholder="User ID"
+              class="input_text"
+              autocomplete="off" required="" maxlength="30"
+            />
+          </div>
+          <div class="input_group">
+            <i class="fa fa-unlock-alt"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              class="input_text"
+              autocomplete="off" required=""
+            />
+          </div>
+          <div class="button_group" id="login_button">
+            <input type="submit" name="login" value="Login">
+          </div>
+          <div class="fotter">
+            <a>Forgot Password ?</a>
+            <a href="Register.html">Create account</a>
+          </div>
+        </div>
+      </div>
+    </form>
+    
+    <script>
+		document.getElementById('loginForm').addEventListener('submit', function (event) {
+			event.preventDefault();
+
+			const userId = document.getElementsByName('userId')[0].value;
+			const password = document.getElementsByName('password')[0].value;
+
+
+			// Construct the URL with parameters
+			const url = `/api/users/login?userId=${userId}&password=${password}`;
+
+
+			// Send the login data to the backend
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(response => {
+					if (response.ok) {
+						alert('Login successful');
+						window.location.href = '/Home.html';  // Redirect to home page
+					} else {
+						alert('Login failed');
+					}
+				})
+				.catch(error => console.error('Error:', error));
+		});
+	</script>
+     
+  </body>
+</html>
+
+
+
+ 
